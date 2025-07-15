@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.LinkLabel;
 
 namespace WinFormsApp1.Core.GitHub
 {
@@ -13,12 +14,9 @@ namespace WinFormsApp1.Core.GitHub
         {
             var list=new List<string>();
 
-            var items = document.QuerySelectorAll("a").Where(item => item.ClassName != null && item.ClassName.Contains("mw-redirect"));
+            var items = document.QuerySelectorAll("h2.tm-title").Select(item => item.TextContent.Trim());
 
-            foreach (var item in items)
-            {
-                list.Add(item.TextContent);
-            }
+            list.AddRange(items);
             return list.ToArray();
         }
     }

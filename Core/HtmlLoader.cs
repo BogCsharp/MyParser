@@ -15,12 +15,15 @@ namespace WinFormsApp1.Core
         public HtmlLoader(IParserSettings parserSettings)
         {
             client = new HttpClient();
+            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64)");
             url = $"{parserSettings.BaseUrl}/{parserSettings.Prefix}";
         }
 
+
         public async Task<string> GetSourceByPageId(int id)
         {
-            var currentUrl=url.Replace("{CurrentId",id.ToString());
+
+            var currentUrl= url.Replace("{CurrentId}", id.ToString());
             var responce=await client.GetAsync(currentUrl);
             string source = null;
 
